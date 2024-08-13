@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webzybird's Fake Unit Generator</title>
+    
+	<link rel="icon" type="image/png" href="favicon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+  
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-top: 50px;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    max-width: 400px;  
+}
+.stat-frame-container {
+	display: flex;
+    flex-direction: column;
+    position: relative;
+	align-items: center; 
+    width: 450px;
+    height: 400px; 
+	margin-bottom: 100px;
+    background: url('statframe.png') center/contain no-repeat;
+}
+stat-frame {
+  display: flex;
+  justify-content: center; 
+  align-items: left; 
+  margin-left: 10%; 
+}
+.stat-box-container {
+  margin-top: 130px; 
+}
+
+.centered-stat-box-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%);
+
+}
+
+.centered-stat-textbox {
+  background-color: transparent;
+  color: #FFFFFF;
+  font-family: 'Silkscreen', sans-serif;
+  font-size: 36px;
+  width: 330px; 
+  height: 50px; 
+  padding: 0px;
+  border: none;
+  resize: none;
+  overflow: hidden;
+  outline: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  white-space: nowrap;
+  display: inline-block;
+  line-height: 50px; 
+}
+
+.exist-count-textbox-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 145%);
+
+}
+
+.exist-count-textbox {
+  background-color: transparent;
+  color: #FFFFFF;
+  font-family: 'Silkscreen', sans-serif;
+  font-size: 36px;
+  width: 230px; 
+  height: 50px; 
+  padding: 0px;
+  border: none;
+  resize: none;
+  font-weight: bold;
+  overflow: hidden;
+  outline: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  white-space: nowrap;
+  display: inline-block;
+  line-height: 50px; 
+}
+
+
+.rarity-stat {
+  margin-top: -5px; 
+  font-family: 'Silkscreen', sans-serif;
+  font-size: 26px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.stat-textbox {
+  background-color: transparent;  
+  color: #FFFFFF;            
+  font-family: 'Silkscreen', sans-serif;
+  font-size: 24px;
+  width: 360px;            
+  height: 20px;
+  margin-left: 24px;
+  margin-bottom: -10px;  
+  padding: 10px;        
+  border: none;         
+  line-height: 20px;
+  resize: none;    
+  overflow: hidden;   
+  white-space: nowrap;
+  outline: none;    
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+  text-align: left; 
+}
+
+#stat-box1 {
+  color: #ffd500; 
+}
+
+#stat-box2 {
+  color: #ff0000;
+}
+
+#stat-box3 {
+  color: #0091ff;
+}
+
+#stat-box4 {
+  color: #99b6d5; 
+}
+
+.equipped-button {
+    width: 50%;
+	height: 70px;
+    padding: 0px;
+    font-size: 36px;
+    color: #0088ff;
+    border: 8px solid #0088ff; 
+    background-color: #000000;
+    border-radius: 0; 
+    font-family: 'Silkscreen', sans-serif;
+    font-weight: bold; 
+    text-align: center; 
+	transform: translateY(10%);
+	margin-left: 48px;
+    position: absolute;
+    bottom: 0;
+    left: -10;
+}
+
+.equipped-button:hover {
+    opacity: 1; 
+}
+
+.delete-icon-container {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(150%);
+    width: 70px; 
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-icon-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.image-container {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    background: url('iconframe.png') center/contain no-repeat;
+    overflow: visible; 
+    margin-bottom: 40px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            mix-blend-mode: multiply;
+            z-index: 1;
+        }
+
+
+        .imported-image-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 86.5%; 
+            height: 86.5%;
+            transform: translate(-50%, -50%); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none; 
+            z-index: 2; 
+        }
+
+        .imported-image-wrapper img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            display: block;
+        }
+
+        button {
+            width: 200px;
+            padding: 10px;
+            margin: 5px;
+            font-size: 14px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            border-radius: 8px; 
+            transition: opacity 0.3s;
+        }
+        .uncommon {
+            background: linear-gradient(to top, #11ff00, #baff6b);
+        }
+
+        .rare {
+            background: linear-gradient(to top, #0066ff, #0fd7ff);
+        }
+
+        .epic {
+            background: linear-gradient(to top, #8c00ff, #d950ff);
+        }
+
+        .mythic {
+            background: linear-gradient(to top, #f7971e, #ffd200);
+        }
+
+        .secret {
+            background: linear-gradient(to top, #ff181c, #ff8183);
+        }
+
+        .nightmare {
+            background: linear-gradient(to top, #591991, #210b32);
+        }
+
+
+        .shiny {
+            background: linear-gradient(to top, #ff0000, #ff7300, #ffee00, #11ff00, #00c3ff, #d400ff);
+        }
+
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+
+        .import-button {
+            width: 120px;
+            padding: 8px;
+            font-size: 14px;
+            color: white;
+            background-color: grey;
+            border: none;
+            cursor: pointer;
+            font-family: 'Source Sans Pro', sans-serif; 
+            border-radius: 8px; 
+            transition: opacity 0.3s;
+            z-index: 3; 
+        }
+
+   
+        .import-button:hover {
+            opacity: 0.8;
+        }
+
+ 
+        .text-frame {
+            position: absolute;
+            bottom: -24px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 56%; 
+            height: 80px; 
+            border: 8px solid #00FF00; 
+            background-color: black; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10; 
+            overflow: hidden; 
+            padding: 0 10px; 
+            box-sizing: border-box; 
+        }
+
+        .text-frame input {
+            background: transparent;
+            border: none;
+            color: #00FF00; 
+            font-family: 'Press Start 2P', cursive; 
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            font-size: 26px; 
+    	    font-weight: bold; 
+            line-height: 60px; 
+            resize: none; 
+            text-shadow: 
+                4px 4px 0 rgb(10, 9, 31),
+                -4px -4px 0 rgb(10, 9, 31),
+                4px -4px 0 rgb(10, 9, 31),
+                -4px 4px 0 rgb(10, 9, 31); 
+        }
+
+        
+        .import-note {
+            font-family: 'Source Sans Pro', sans-serif; 
+            font-size: 12px;
+            color: white;
+            margin-top: 5px;
+        }
+
+
+        .shiny-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('shiny.png') center/contain no-repeat;
+            z-index: 9; 
+            display: none; 
+        }
+.label-frame #label-text {
+    color: #FFFFFF; 
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 24px; 
+    font-weight: bold; 
+    text-shadow:
+        4px 4px 0 rgb(10, 9, 31),
+        -4px -4px 0 rgb(10, 9, 31),
+        4px -4px 0 rgb(10, 9, 31),
+        -4px 4px 0 rgb(10, 9, 31); 
+    line-height: 1.5; 
+    display: none; 
+    position: relative; 
+    z-index: 8; 
+}
+
+.label-frame {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    text-align: center;
+    z-index: 7; 
+}
+
+.label-frame #label-text2 {
+    color: #FFFFFF; 
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 24px; 
+    font-weight: bold; 
+    line-height: 1.5; 
+    display: none; 
+    position: absolute;
+    z-index: 9; 
+    top: 0; 
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-shadow: none; 
+}
+
+
+.dropdown-content a[href="#none"] {
+    display: none; 
+}
+    </style>
+</head>
+<body>
+
+    <h1>WEBZYBIRD'S FAKE UNIT GENERATOR</h1>
+
+    <div class="container">
+
+        <button class="import-button" onclick="document.getElementById('fileInput').click()">Import Image</button>
+        <input type="file" id="fileInput" style="display:none" accept="image/*" onchange="loadImage(event)">
+
+
+        <div class="import-note">(Imported images must have a 1:1 aspect ratio in order to look right!)</div>
+
+        <div class="image-container" id="image-container">
+            <div class="imported-image-wrapper" id="imported-image-wrapper">
+            </div>
+            <div class="gradient-overlay" id="gradient-overlay"></div>
+<div class="label-frame" id="label-frame">
+    <span id="label-text">Select Enchantment</span>
+    <span id="label-text2">Select Enchantment</span> 
+</div>
+
+
+            <div class="text-frame">
+                <input type="text" value="$ 300" oninput="adjustTextSize(this)">
+            </div>
+
+            <div class="shiny-image" id="shiny-image"></div>
+        </div>
+
+
+        <button class="uncommon" onclick="setGradient('uncommon')">Uncommon</button>
+        <button class="rare" onclick="setGradient('rare')">Rare</button>
+        <button class="epic" onclick="setGradient('epic')">Epic</button>
+        <button class="mythic" onclick="setGradient('mythic')">Mythic</button>
+        <button class="secret" onclick="setGradient('secret')">Secret</button>
+        <button class="nightmare" onclick="setGradient('nightmare')">Nightmare</button>
+        <button class="shiny" onclick="setGradient('shiny')">Shiny</button>
+<div class="dropdown-container">
+    <button class="dropdown-button">Add Enchant</button>
+    <div class="dropdown-content">
+	<a href="#" id="none">None</a>
+	<a href="#" id="damageI">Damage I</a>
+	<a href="#" id="damageII">Damage II</a>
+	<a href="#" id="damageIII">Damage III</a>
+	<a href="#" id="rangeI">Range I</a>
+	<a href="#" id="rangeII">Range II</a>
+	<a href="#" id="rangeIII">Range III</a>
+	<a href="#" id="speedI">Speed I</a>
+	<a href="#" id="speedII">Speed II</a>
+	<a href="#" id="speedIII">Speed III</a>
+	<a href="#" id="withered">Withered</a>
+	<a href="#" id="bossKiller">BOSS KILLER</a>
+	<a href="#" id="puppetsNightmare">PUPPETS NIGHTMARE</a>
+	<a href="#" id="bounded">Bounded</a>
+	<a href="#" id="shadow">Shadow</a>
+	<a href="#" id="vengeance">VENGEANCE</a>
+    </div>
+</div>
+
+<style>
+
+    .dropdown-container {
+        position: relative;
+        display: inline-block;
+        margin-top: 10px; 
+    }
+
+
+    .dropdown-button {
+        width: 200px;
+        padding: 10px;
+        font-size: 14px;
+        color: white;
+        background-color: grey;
+        border: none;
+        cursor: pointer;
+        font-family: 'Press Start 2P', cursive;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: black;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 8px;
+    }
+
+
+    .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        font-family: 'Press Start 2P', cursive;
+    }
+
+
+    .dropdown-content a:hover {
+        background-color: #555;
+    }
+
+  
+    .dropdown-container:hover .dropdown-content {
+        display: block;
+    }
+</style>
+    </div>
+<div class="stat-frame-container">
+    <div class="stat-frame">
+        <div class="stat-box-container">
+            <textarea class="stat-textbox" id="stat-box1" oninput="adjustTextSize(this)" spellcheck="false">Type: Single</textarea>
+            <textarea class="stat-textbox" id="stat-box2" oninput="adjustTextSize(this)" spellcheck="false">Damage: 20-30</textarea>
+            <textarea class="stat-textbox" id="stat-box3" oninput="adjustTextSize(this)" spellcheck="false">Range: 10-15</textarea>
+            <textarea class="stat-textbox" id="stat-box4" oninput="adjustTextSize(this)" spellcheck="false">Cooldown: 1-0.75</textarea>
+        </div>
+        <div class="centered-stat-box-container">
+            <textarea class="centered-stat-textbox" oninput="adjustTextSize(this)" spellcheck="false">Unit Name</textarea>
+            <div class="rarity-stat">Common</div>
+        </div>
+		<div class="exist-count-textbox-container">
+            <textarea class="exist-count-textbox" oninput="adjustTextSize(this)" spellcheck="false">35 Exists</textarea>
+        </div>
+		 <button class="equipped-button">Unequip</button>
+		 <div class="delete-icon-container">
+    <img src="deleteicon.png" alt="Delete Icon">
+</div>
+    </div>
+</div>
+    <script>
+
+const initialRarityText = document.querySelector('.rarity-stat').textContent;
+const initialGradient = getComputedStyle(document.querySelector('.rarity-stat')).background;
+
+function setGradient(rarity) {
+    const gradientOverlay = document.getElementById('gradient-overlay');
+    const shinyImage = document.getElementById('shiny-image');
+    const rarityStat = document.querySelector('.rarity-stat');
+
+    let currentGradient;
+    let currentGradient2;
+    let currentText;
+
+    if (rarityStat.style.backgroundClip === 'text') {
+        currentGradient = gradientOverlay.style.background;
+        currentGradient2 = rarityStat.style.background;
+        currentText = rarityStat.textContent;
+    }
+
+    let gradient;
+    let gradient2;
+    let rarityText;
+
+       switch (rarity) {
+        case 'uncommon':
+            gradient = 'linear-gradient(to top, #11ff00, #baff6b)';
+			gradient2 = 'linear-gradient(to top, #81A522, #31A509)';
+            rarityText = 'Uncommon';
+			shinyImage.style.display = 'none'; 
+            break;
+        case 'rare':
+            gradient = 'linear-gradient(to top, #0066ff, #0fd7ff)';
+			gradient2 = 'linear-gradient(to top, #0A7378, #025078)';
+            rarityText = 'Rare';
+			shinyImage.style.display = 'none'; 
+            break;
+        case 'epic':
+            gradient = 'linear-gradient(to top, #8c00ff, #d950ff)';
+			gradient2 = 'linear-gradient(to top, #BF2378, #9B0A78)';
+            rarityText = 'Epic';
+			shinyImage.style.display = 'none'; 
+            break;
+        case 'mythic':
+            gradient = 'linear-gradient(to top, #f7971e, #ffd200)';
+			gradient2 = 'linear-gradient(to top, #FF8E14, #FF7B06)';
+            rarityText = 'Mythic';
+			shinyImage.style.display = 'none'; 
+            break;
+        case 'secret':
+            gradient = 'linear-gradient(to top, #ff181c, #ff8183)';
+			gradient2 = 'linear-gradient(to top, #FF3D2E, #FF1D16)';
+            rarityText = 'Secret';
+			shinyImage.style.display = 'none'; 
+            break;
+        case 'nightmare':
+            gradient = 'linear-gradient(to top, #591991, #210b32)';
+			gradient2 = 'linear-gradient(to top, #330A26, #4E0F3C)';
+            rarityText = 'Nightmare';
+			shinyImage.style.display = 'none'; 
+            break;
+        case 'shiny':
+
+              gradient = 'linear-gradient(to top, #ff0000, #ff7300, #ffee00, #11ff00, #00c3ff, #d400ff)';
+            gradient2 = currentGradient2 || 'linear-gradient(to top, #ff0000, #ff7300, #ffee00, #11ff00, #00c3ff, #d400ff)';
+            rarityText = currentText || 'Shiny';
+            shinyImage.style.display = 'block'; 
+            break;
+        default:
+            gradient = 'none';
+            gradient2 = 'none';
+            rarityText = '';
+            shinyImage.style.display = 'none';
+    }
+
+    gradientOverlay.style.background = gradient;
+    rarityStat.style.background = gradient2; 
+    
+
+    rarityStat.style.backgroundClip = 'text';
+    rarityStat.style.webkitBackgroundClip = 'text';
+    rarityStat.style.color = 'transparent';
+
+    rarityStat.textContent = rarityText; 
+}
+
+        function loadImage(event) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                const importedImageWrapper = document.getElementById('imported-image-wrapper');
+                importedImageWrapper.innerHTML = `<img src="${reader.result}" alt="Imported Image">`;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+ function adjustTextSize(input) {
+    const frame = input.parentElement;
+    const frameWidth = frame.offsetWidth;
+    const frameHeight = frame.offsetHeight;
+
+
+    let fontSize;
+    let widthAdjustment;
+    
+    if (input.classList.contains('centered-stat-textbox')) {
+        fontSize = 36; 
+        widthAdjustment = 0;
+    } else if (input.classList.contains('stat-textbox')) {
+        fontSize = 24; 
+        widthAdjustment = 67; 
+	  } else if (input.classList.contains('exist-count-textbox')) {
+        fontSize = 36; 
+        widthAdjustment = 0;
+    } else {
+        fontSize = 26;
+        widthAdjustment = 32;
+    }
+
+    input.style.fontSize = fontSize + 'px';
+
+
+    while (input.scrollWidth > frameWidth - widthAdjustment || input.scrollHeight > frameHeight) {
+        fontSize--;
+        input.style.fontSize = fontSize + 'px';
+        if (fontSize <= 10) break;
+    }
+}
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const input = document.querySelector('.text-frame input');
+        adjustTextSize(input);
+    });
+
+function updateLabelText(text, direction = "to top") {
+    const labelText = document.getElementById('label-text');
+    const labelText2 = document.getElementById('label-text2'); 
+
+    const fontSizeMap = {
+        "None": 24, 
+        "Damage I": 30,
+        "Damage II": 30,
+        "Damage III": 32,
+        "Range I": 30,
+        "Range II": 30,
+        "Range III": 30,
+        "Speed I": 30,
+        "Speed II": 30,
+        "Speed III": 30,
+        "Withered": 32,
+        "BOSS KILLER": 32,
+        "PUPPETS NIGHTMARE": 30,
+        "Bounded": 38,
+        "Shadow": 42,
+        "VENGEANCE": 30
+    };
+
+    const gradientMap = {
+        "None": "",
+        "Damage I": `linear-gradient(${direction}, #ff181c, #ff8183)`,
+        "Damage II": `linear-gradient(${direction}, #ff181c, #ff8183)`,
+        "Damage III": `linear-gradient(${direction}, #ff181c, #ff8183)`,
+        "Range I": `linear-gradient(${direction}, #2e31ff, #72f1ff)`,
+        "Range II": `linear-gradient(${direction}, #2e31ff, #72f1ff)`,
+        "Range III": `linear-gradient(${direction}, #2e31ff, #72f1ff)`,
+        "Speed I": `linear-gradient(${direction}, #f7971e, #ffd200)`,
+        "Speed II": `linear-gradient(${direction}, #f7971e, #ffd200)`,
+        "Speed III": `linear-gradient(${direction}, #f7971e, #ffd200)`,
+        "Withered": `linear-gradient(${direction}, #79213d, #ff8ab7)`,
+        "BOSS KILLER": `linear-gradient(${direction}, #b31aff, #f45eff)`,
+        "PUPPETS NIGHTMARE": `linear-gradient(to right, #5d2c87, #aec6ff)`,
+        "Bounded": `linear-gradient(to right, #53fd9a, #27e22f)`,
+        "Shadow": `linear-gradient(${direction}, #161a2b, #9caade)`,
+        "VENGEANCE": `linear-gradient(${direction}, #fd4800, #e23f16)`
+    };
+
+
+    if (text === "Bounded" || text === "PUPPETS NIGHTMARE") {
+        direction = "to right"; 
+    }
+
+    const fontSize = fontSizeMap[text] || 24;
+    const gradient = gradientMap[text] || "";
+
+
+    if (text === "None") {
+        labelText.textContent = ""; 
+        labelText.style.backgroundImage = ""; 
+        labelText.style.webkitBackgroundClip = "none";
+        labelText.style.webkitTextFillColor = "inherit"; 
+        labelText.style.display = 'none'; 
+    } else {
+        labelText.textContent = text;
+        labelText.style.fontSize = fontSize + "px";
+        labelText.style.backgroundImage = gradient;
+        labelText.style.webkitBackgroundClip = "text";
+        labelText.style.webkitTextFillColor = "transparent";
+        labelText.style.display = 'block';
+    }
+
+    if (text === "None") {
+        labelText2.textContent = ""; 
+        labelText2.style.backgroundImage = ""; 
+        labelText2.style.webkitBackgroundClip = "none";
+        labelText2.style.webkitTextFillColor = "inherit"; 
+        labelText2.style.display = 'none'; 
+    } else {
+        labelText2.textContent = text;
+        labelText2.style.fontSize = fontSize + "px";
+        labelText2.style.backgroundImage = gradient;
+        labelText2.style.webkitBackgroundClip = "text";
+        labelText2.style.webkitTextFillColor = "transparent";
+        labelText2.style.display = 'block'; 
+    }
+}
+
+
+document.querySelectorAll('.dropdown-content a').forEach(option => {
+    option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const selectedText = e.target.textContent.trim();
+        updateLabelText(selectedText);
+    });
+});
+
+document.querySelectorAll('.dropdown-content a').forEach(option => {
+    option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const selectedText = e.target.textContent.trim();
+        updateLabelText(selectedText);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.querySelector('.text-frame input');
+    adjustTextSize(input);
+    
+    const equipButton = document.querySelector('.equipped-button');
+    let isEquipped = false; 
+    
+    equipButton.addEventListener('click', () => {
+        isEquipped = !isEquipped; 
+        if (isEquipped) {
+            equipButton.textContent = 'Equip';
+            document.querySelector('.text-frame').style.borderColor = '#FF0000'; 
+			document.querySelector('.text-frame input').style.color = '#FF0000'; 
+        } else {
+            equipButton.textContent = 'Unequip';
+            document.querySelector('.text-frame input').style.color = '#00FF00';
+            document.querySelector('.text-frame').style.borderColor = '#00FF00'; 
+        }
+    });
+});
+
+</script>
+
+</body>
+</html>
