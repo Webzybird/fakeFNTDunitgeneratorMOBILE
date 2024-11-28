@@ -284,6 +284,10 @@ stat-frame {
         .nightmare {
             background: linear-gradient(to top, #591991, #210b32);
         }
+		
+		.apex {
+            background: linear-gradient(to top, #D3114F, #8024F4);
+        }
 
 
         .shiny {
@@ -457,6 +461,7 @@ stat-frame {
         <button class="mythic" onclick="setGradient('mythic')">Mythic</button>
         <button class="secret" onclick="setGradient('secret')">Secret</button>
         <button class="nightmare" onclick="setGradient('nightmare')">Nightmare</button>
+		<button class="apex" onclick="setGradient('apex')">APEX</button>
         <button class="shiny" onclick="setGradient('shiny')">Shiny</button>
 <div class="dropdown-container">
     <button class="dropdown-button">Add Enchant</button>
@@ -553,6 +558,8 @@ stat-frame {
 </div>
     </div>
 </div>
+
+
     <script>
 
 const initialRarityText = document.querySelector('.rarity-stat').textContent;
@@ -612,6 +619,12 @@ function setGradient(rarity) {
             gradient = 'linear-gradient(to top, #591991, #210b32)';
 			gradient2 = 'linear-gradient(to top, #330A26, #4E0F3C)';
             rarityText = 'Nightmare';
+			shinyImage.style.display = 'none'; 
+            break;
+		case 'apex':
+            gradient = 'linear-gradient(to top, #D3114F, #8024F4)';
+			gradient2 = 'linear-gradient(to top, #CE082C, #B5158C)';
+            rarityText = 'Apex';
 			shinyImage.style.display = 'none'; 
             break;
         case 'shiny':
